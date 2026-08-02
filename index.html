@@ -1,0 +1,1445 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gurukrupa Dental Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand:#14b8a6;      /* fresh teal */
+      --brand-dark:#0f766e; /* deep teal */
+      --gold:#d97706;       /* warm gold accent */
+      --text:#0f172a;
+      --muted:#475569;
+      --bg:#f0fdfa;
+    }
+    body{font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;color:var(--text);}
+
+    /* Nav */
+    .navbar{backdrop-filter:saturate(180%) blur(10px);}
+    .nav-link{color:rgba(15,23,42,.85) !important; font-weight:500;}
+    .nav-link:hover{color:var(--brand-dark) !important;}
+
+    /* Buttons - branded gradient */
+    .btn-primary{
+      background:linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%) !important;
+      border:none !important;
+      box-shadow:0 10px 25px rgba(15,118,110,.25) !important;
+      transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 32px rgba(15,118,110,.38) !important;
+      filter:brightness(1.05);
+    }
+    .btn-outline-primary{
+      border:2px solid var(--brand) !important;
+      color:var(--brand-dark) !important;
+      transition:background .2s ease, transform .2s ease;
+    }
+    .btn-outline-primary:hover{
+      background:rgba(20,184,166,.10) !important;
+      transform:translateY(-2px);
+    }
+    .btn-gold{
+      background:linear-gradient(135deg, #f59e0b 0%, var(--gold) 100%) !important;
+      border:none !important;
+      color:#fff !important;
+      box-shadow:0 10px 25px rgba(217,119,6,.25) !important;
+    }
+    .btn-gold:hover{transform:translateY(-2px); filter:brightness(1.06);}
+
+    /* Hero */
+    .hero{
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(1100px 460px at 88% -8%, rgba(217,119,6,.14), transparent 60%),
+        linear-gradient(135deg, rgba(20,184,166,.18), rgba(15,118,110,.05));
+    }
+    .hero .hero-img{
+      border-radius:22px;
+      box-shadow:0 18px 50px rgba(15,118,110,.22);
+      border:1px solid rgba(20,184,166,.28);
+      object-fit:cover;
+      width:100%;
+      height:420px;
+    }
+
+    /* Section titles with gold underline accent */
+    .section-title{
+      font-weight:700;
+      letter-spacing:.2px;
+      color:var(--brand-dark);
+      display:inline-block;
+      position:relative;
+      padding-bottom:6px;
+    }
+    .section-title::after{
+      content:"";
+      position:absolute;
+      left:0; bottom:0;
+      width:52px; height:3px;
+      border-radius:99px;
+      background:linear-gradient(90deg, var(--brand), var(--gold));
+    }
+    .section-title.center::after{left:50%; transform:translateX(-50%);}
+    .lead{color:var(--muted);}
+
+    /* Feature cards */
+    .feature-card{
+      background:#fff;
+      border:1px solid rgba(20,184,166,.16);
+      border-radius:18px;
+      padding:18px;
+      height:100%;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      will-change: transform;
+      animation: cardPop .6s ease both;
+    }
+
+    @keyframes cardPop{
+      from{ transform: translateY(10px); opacity:0; }
+      to{ transform: translateY(0); opacity:1; }
+    }
+    .feature-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 18px 40px rgba(15,118,110,.14);
+      border-color:rgba(20,184,166,.38);
+    }
+
+    /* Infinite scroll animation for service images */
+    .feature-card .feature-icon img{
+      transition:transform .7s ease, opacity .7s ease;
+      transform:scale(0.88);
+      opacity:0.7;
+    }
+    .feature-card.reveal.in .feature-icon img{
+      transform:scale(1);
+      opacity:1;
+      animation: imgBreath 3s ease-in-out infinite;
+    }
+    @keyframes imgBreath{
+      0%,100%{ transform:scale(1); }
+      50%{ transform:scale(1.06); }
+    }
+
+    .feature-icon{
+      width:46px; height:46px;
+      border-radius:14px;
+      background:rgba(20,184,166,.12);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--brand-dark);
+      font-size:18px;
+      margin-bottom:12px;
+    }
+
+    /* Motion (scroll reveal) */
+    .reveal{
+      opacity:0;
+      transform:translateY(18px);
+      filter: blur(2px);
+      transition:opacity .75s ease, transform .75s ease, filter .75s ease;
+    }
+    .reveal.in{
+      opacity:1;
+      transform:translateY(0);
+      filter: blur(0);
+    }
+
+    /* Text slide shimmer (gold) */
+    .text-reveal{
+      display:inline-block;
+      position:relative;
+    }
+    .text-reveal::after{
+      content:"";
+      position:absolute;
+      left:0; top:100%;
+      width:100%; height:2px;
+      background:linear-gradient(90deg, transparent, rgba(217,119,6,.9), transparent);
+      opacity:0;
+      transform:translateY(6px);
+      transition:opacity .35s ease, transform .35s ease;
+    }
+    .reveal.in .text-reveal::after{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* Gentle floating for important images */
+    .floaty{
+      animation: floating 5s ease-in-out infinite;
+    }
+
+    @keyframes floating{
+      0%{
+        transform: translateY(0) rotate(0deg);
+      }
+      50%{
+        transform: translateY(-15px) rotate(2deg);
+      }
+      100%{
+        transform: translateY(0) rotate(0deg);
+      }
+    }
+
+    /* Fade-out on scroll away */
+    .fade-out{
+      opacity:.25 !important;
+      transform:translateY(8px);
+      transition:opacity .4s ease, transform .4s ease;
+    }
+
+    /* Appointment */
+    .appt{
+      background:linear-gradient(135deg, rgba(20,184,166,.14), rgba(15,118,110,.04));
+      border-radius:22px;
+      border:1px solid rgba(20,184,166,.2);
+      padding:22px;
+    }
+
+    /* Testimonials */
+    .quote{
+      background:#fff;
+      border:1px solid rgba(20,184,166,.16);
+      border-radius:18px;
+      padding:18px;
+      height:100%;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .quote:hover{
+      transform:translateY(-4px);
+      box-shadow:0 18px 40px rgba(15,118,110,.12);
+      border-color:rgba(20,184,166,.34);
+    }
+
+    /* Footer */
+    footer{
+      background:linear-gradient(135deg, #062a29 0%, #0b3d3a 100%);
+      color:#cbd5e1;
+    }
+    footer a{color:#cbd5e1; text-decoration:none;}
+    footer a:hover{color:#fff;}
+
+    /* Brand logo */
+    .brand-logo{width:48px;height:48px;object-fit:contain;display:block;}
+
+    /* Clinic gallery */
+    .gallery-tile{
+      width:100%;
+      background:linear-gradient(180deg, rgba(20,184,166,.10), rgba(255,255,255,.00));
+      border:0;
+      padding:0;
+      background:transparent;
+      border-radius:14px;
+      overflow:hidden;
+      position:relative;
+      cursor:pointer;
+      transform:translateZ(0);
+      transition:transform .25s ease, box-shadow .25s ease;
+      box-shadow:0 10px 30px rgba(15,118,110,.10);
+      border:1px solid rgba(20,184,166,.16);
+    }
+    /* Brand overlay replacing watermark at bottom of gallery images */
+    .gallery-tile::after{
+      content:'Gurukrupa Dental Clinic & Implant Center';
+      position:absolute;
+      bottom:0;
+      left:0;
+      width:100%;
+      padding:8px 12px;
+      background:linear-gradient(to top, rgba(255,255,255,.9), transparent);
+      color:#0f766e;
+      font-size:11px;
+      font-weight:700;
+      text-align:center;
+      letter-spacing:.3px;
+      pointer-events:none;
+      z-index:2;
+      line-height:1.3;
+      text-shadow:0 1px 2px rgba(255,255,255,.5);
+    }
+    .gallery-tile img{
+      display:block;
+      height:220px;
+      object-fit:cover;
+      transition:transform .35s ease, filter .35s ease;
+      filter:saturate(1.05) contrast(1.02) brightness(.98);
+    }
+    .gallery-tile:hover{
+      transform:translateY(-6px);
+      box-shadow:0 18px 50px rgba(15,118,110,.18);
+    }
+    .gallery-tile:hover img{transform:scale(1.08); filter:saturate(1.18) contrast(1.08) brightness(1.02);}
+
+    .gallery-tile .shine{
+      position:absolute;
+      inset:-30% -40%;
+      background:linear-gradient(120deg, transparent 20%, rgba(255,255,255,.35) 50%, transparent 80%);
+      transform:translateX(-40%) rotate(10deg);
+      opacity:.0;
+      transition:opacity .25s ease;
+      pointer-events:none;
+    }
+    .gallery-tile:hover .shine{opacity:1; animation:shineSweep .85s ease-out;}
+
+    @keyframes shineSweep{
+      from{transform:translateX(-40%) rotate(10deg);}
+      to{transform:translateX(40%) rotate(10deg);}
+    }
+
+    .zoom-indicator{
+      position:absolute;
+      top:12px;
+      right:12px;
+      width:38px;
+      height:38px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.85);
+      border:1px solid rgba(20,184,166,.25);
+      color:var(--brand-dark);
+      transform:scale(.9);
+      opacity:0;
+      transition:opacity .2s ease, transform .2s ease;
+      pointer-events:none;
+    }
+    .gallery-tile:hover .zoom-indicator{opacity:1; transform:scale(1);}
+
+    /* Certificate tiles (used inside About section) */
+    .certificate-tile{
+      width:100%;
+      border-radius:14px;
+      overflow:hidden;
+      position:relative;
+      cursor:zoom-in;
+      box-shadow:0 10px 30px rgba(15,118,110,.10);
+      border:1px solid rgba(20,184,166,.16);
+      background:#fff;
+      display:block;
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .certificate-tile img{
+      display:block;
+      width:100%;
+      height:230px;
+      object-fit:contain;
+      background:#fff;
+      padding:12px;
+      transition:transform .35s ease;
+    }
+    .certificate-tile:hover{
+      transform:translateY(-6px);
+      box-shadow:0 18px 50px rgba(15,118,110,.18);
+    }
+    .certificate-tile:hover img{transform:scale(1.03);}
+    .certificate-tile .zoom-indicator{
+      position:absolute;
+      top:12px;
+      right:12px;
+      width:38px;
+      height:38px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.85);
+      border:1px solid rgba(20,184,166,.25);
+      color:var(--brand-dark);
+      transform:scale(.9);
+      opacity:0;
+      transition:opacity .2s ease, transform .2s ease;
+      pointer-events:none;
+    }
+    .certificate-tile:hover .zoom-indicator{opacity:1; transform:scale(1);}
+
+    /* Lightbox */
+    #lightbox{display:none; position:fixed; inset:0; z-index:9999;}
+    #lightboxBackdrop{position:absolute; inset:0; background:rgba(2,6,23,.72);}
+    #lightboxInner{position:relative; width:min(1100px, 92vw); margin:6vh auto 0; background:transparent;}
+    #lightboxImg{width:100%; height:auto; border-radius:18px; border:1px solid rgba(255,255,255,.22); box-shadow:0 30px 90px rgba(0,0,0,.45);}
+    #lightboxClose{
+      position:absolute;
+      top:-10px;
+      right:-10px;
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.12);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      font-size:18px;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Treatment videos */
+    .video-card{
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(20,184,166,.16);
+      background:linear-gradient(135deg, rgba(20,184,166,.12), rgba(255,255,255,.0));
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .video-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 18px 45px rgba(15,118,110,.16);
+    }
+    .video-card video{
+      border-radius:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .video-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(20,184,166,.2);
+      background:rgba(255,255,255,.7);
+      backdrop-filter: blur(10px);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .video-card, .gallery-tile, .gallery-tile img{transition:none !important;}
+      #lightbox{transition:none !important;}
+    }
+
+    /* Bounce text effect */
+    .bounce-text{
+      display:inline-block;
+      animation: bounceText 1.2s ease-in-out infinite;
+    }
+    @keyframes bounceText{
+      0%,100%{ transform:translateY(0); }
+      40%{ transform:translateY(-10px); }
+      60%{ transform:translateY(-10px); }
+    }
+
+    /* Parallax container for about images */
+    .parallax-wrap{
+      position:relative;
+      overflow:hidden;
+      border-radius:16px;
+      will-change:transform;
+    }
+    .parallax-wrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform 0.1s linear;
+      will-change:transform;
+    }
+
+    /* Dental Care Posts images */
+    .post-card-img{
+      width:100%;
+      height:420px;
+      object-fit:contain;
+      object-position:center;
+      display:block;
+      background:#f0fdfa;
+      padding:8px;
+      filter:saturate(1.05) contrast(1.02);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Bar (optional, minimal) -->
+  <div class="bg-white border-bottom">
+    <div class="container py-2 d-flex flex-wrap align-items-center justify-content-between gap-2">
+      <div class="d-flex gap-3 align-items-center">
+        <div class="d-flex align-items-center gap-2 text-dark">
+          <i class="fa-solid fa-location-dot" style="color:var(--brand-dark)"></i>
+          <span class="small">Gurukrupa Dental Clinic & Implant Center, Ahmedabad</span>
+        </div>
+        <div class="d-flex align-items-center gap-2 text-dark">
+          <i class="fa-solid fa-phone" style="color:var(--brand-dark)"></i>
+          <span class="small">+91 9924644779</span>
+        </div>
+      </div>
+      <div class="d-flex gap-3 align-items-center">
+        <a class="small text-decoration-none" href="#appointment" style="color:var(--brand-dark);font-weight:600">Book Appointment</a>
+        <a class="small text-decoration-none" href="#contact"><i class="fa-brands fa-whatsapp" style="color:#22c55e"></i> WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#home">
+        <span style="width:48px;height:48px;border-radius:16px;background:rgba(20,184,166,.15);display:flex;align-items:center;justify-content:center;color:var(--brand-dark)">
+          <img src="images/GDC1.PNG" class="brand-logo" alt="Gurukrupa Dental Clinic" />
+        </span>
+        <span>Gurukrupa Dental Clinic &amp; Implant Center</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#doctors">Doctors</a></li>
+          <li class="nav-item"><a class="nav-link" href="#testimonials">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="d-flex ms-lg-3">
+          <a class="btn btn-primary px-3" href="#appointment" style="font-weight:600">
+            Book Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="hero">
+    <div class="container py-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+          <h1 class="display-5 fw-bold" style="line-height:1.15;">
+            <span class="text-reveal">Premium Dental Care</span><br />
+            <span style="color:var(--brand-dark)" class="text-reveal">for Healthy Smiles</span>
+          </h1>
+          <p class="lead mt-3">
+            From routine checkups to advanced dental procedures—our team provides safe, gentle, and effective care.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a href="#appointment" class="btn btn-primary btn-lg" style="font-weight:700">
+              Schedule Appointment
+            </a>
+            <a href="#services" class="btn btn-outline-primary btn-lg" style="font-weight:700">
+              Explore Services
+            </a>
+          </div>
+
+          <div class="row g-3 mt-4">
+            <div class="col-md-6">
+              <div class="p-3 rounded-4 bg-white border" style="border-color:rgba(20,184,166,.18)">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-shield-heart" style="color:var(--brand-dark)"></i>
+                  <strong>Hygiene First</strong>
+                </div>
+                <div class="small text-muted mt-2">Sterilization &amp; patient safety protocols</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 rounded-4 bg-white border" style="border-color:rgba(20,184,166,.18)">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="fa-solid fa-clock" style="color:var(--brand-dark)"></i>
+                  <strong>Flexible Timing</strong>
+                </div>
+                <div class="small text-muted mt-2">Easy booking and quick consultations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <img class="hero-img floaty"
+               src="images/1.1.jpeg" alt="Gurukrupa Dental Clinic" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Services -->
+  <section id="services" class="py-5" style="background:var(--bg)">
+    <div class="container">
+      <div class="text-center mb-4">
+        <div class="section-title fs-4 center">Our Dental Services</div>
+        <p class="lead mb-0 mt-2">Everything you need for complete oral health.</p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(20,184,166,.10);width:100%;height:180px;border-radius:18px;margin-bottom:14px;overflow:hidden">
+              <img src="images/gd.jpg" alt="General Dentistry" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <h5 class="fw-bold">General Dentistry</h5>
+            <p class="small text-muted mb-0">Checkups, cleaning, fillings, and guidance.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(20,184,166,.10);width:100%;height:180px;border-radius:18px;margin-bottom:14px;overflow:hidden">
+              <img src="images/cd.jpg" alt="Cosmetic Dentistry" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <h5 class="fw-bold">Cosmetic Dentistry</h5>
+            <p class="small text-muted mb-0">Whitening, veneers, and smile enhancement.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(20,184,166,.10);width:100%;height:180px;border-radius:18px;margin-bottom:14px;overflow:hidden">
+              <img src="images/rct.jpg" alt="Root Canal Treatment" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <h5 class="fw-bold">Root Canal Treatment</h5>
+            <p class="small text-muted mb-0">Pain relief and saving natural teeth.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(20,184,166,.10);width:100%;height:180px;border-radius:18px;margin-bottom:14px;overflow:hidden">
+              <img src="images/dh.webp" alt="Dental Hygiene" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <h5 class="fw-bold">Dental Hygiene</h5>
+            <p class="small text-muted mb-0">Scaling, polishing, and prevention plans.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(20,184,166,.10);width:100%;height:180px;border-radius:18px;margin-bottom:14px;overflow:hidden">
+              <img src="images/ortho.webp" alt="Orthodontics" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <h5 class="fw-bold">Orthodontics</h5>
+            <p class="small text-muted mb-0">Braces and aligners for straighter teeth.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(20,184,166,.10);width:100%;height:180px;border-radius:18px;margin-bottom:14px;overflow:hidden">
+              <img src="images/de.jpg" alt="Emergency Care" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <h5 class="fw-bold">Emergency Care</h5>
+            <p class="small text-muted mb-0">Fast help for sudden tooth pain.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(20,184,166,.10);width:100%;height:180px;border-radius:18px;margin-bottom:14px;overflow:hidden">
+              <img src="images/imp.webp" alt="Dental Implant" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <h5 class="fw-bold">Dental Implant</h5>
+            <p class="small text-muted mb-0">Natural-looking replacement teeth.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(20,184,166,.10);width:100%;height:180px;border-radius:18px;margin-bottom:14px;overflow:hidden">
+              <img src="images/pv.webp" alt="Porcelain Veneers" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <h5 class="fw-bold">Porcelain Veneers</h5>
+            <p class="small text-muted mb-0">Brighten and reshape your smile.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(20,184,166,.10);width:100%;height:180px;border-radius:18px;margin-bottom:14px;overflow:hidden">
+              <img src="images/cb.jpeg" alt="Crown &amp; Bridge" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <h5 class="fw-bold">Crown &amp; Bridge</h5>
+            <p class="small text-muted mb-0">Restore function and aesthetics.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(20,184,166,.10);width:100%;height:180px;border-radius:18px;margin-bottom:14px;overflow:hidden">
+              <img src="images/fmr.jpg" alt="FMR - Full Mouth Rehab" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <h5 class="fw-bold">FMR - Full Mouth Rehab</h5>
+            <p class="small text-muted mb-0">Comprehensive care for complete dental health.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(20,184,166,.10);width:100%;height:180px;border-radius:18px;margin-bottom:14px;overflow:hidden">
+              <img src="images/dent.webp" alt="Dentures" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <h5 class="fw-bold">Dentures</h5>
+            <p class="small text-muted mb-0">Comfortable removable tooth replacement.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:rgba(20,184,166,.10);width:100%;height:180px;border-radius:18px;margin-bottom:14px;overflow:hidden">
+              <img src="images/extrac.webp" alt="Extraction &amp; Dismpaction" style="width:100%;height:100%;object-fit:cover;" />
+            </div>
+            <h5 class="fw-bold">Extraction &amp; Dismpaction</h5>
+            <p class="small text-muted mb-0">Safe extractions with proper recovery guidance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About + Gallery -->
+  <section id="about" class="py-5">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6" style="text-align:justify">
+          <div class="section-title fs-4" style="text-align:left">About Gurukrupa Dental Clinic</div><br />
+         
+          <h3>GURUKRUPA DENTAL CLINIC & IMPLANT CENTER</h3><BR />
+          <h2 class="fw-bold mt-2 bounce-text" style="text-align:left">Since 2007 • One stop solution for all dental treatments</h2><br /><br /><br />
+          
+          
+          <p class="lead mt-3">
+            GURUKRUPA DENTAL CLINIC SINCE 2007 — one stop solution for all type of dental treatment. Your smile is our goal.
+            We work here for your happiness &amp; smile.
+          </p><br />
+
+          <p class="mt-3 text-muted">
+            With over 19 years of experience, Dr. Satish Modi has been providing trusted, ethical, and high-quality dental care since 2007.
+            His approach focuses on accurate diagnosis, personalized treatment, and patient comfort—so every patient receives the best possible care.
+            <br /><br />
+            Dr. Modi believes that a healthy smile is the foundation of confidence and overall well-being.
+            He stays updated with modern dental techniques and technologies to deliver safe, effective, and painless treatments.
+          </p>
+
+          <div class="mt-4">
+            <div class="section-title fs-5 mb-2" style="text-align:left">About Our Practice</div>
+            <p class="text-muted mb-3">
+              Established in 2007, our dental practice has been committed to delivering comprehensive dental care with honesty, compassion, and excellence.
+              We offer a wide range of preventive, restorative, cosmetic, and implant dentistry services in a clean, comfortable, and patient-friendly environment.
+            </p>
+            <p class="text-muted mb-0">
+              Our mission is to build lasting relationships with our patients by providing quality treatment, transparent guidance, and personalized care.
+              Thousands of patients have trusted us with their smiles, and we continue to serve our community with dedication and professionalism.
+            </p>
+          </div>
+
+          <div class="mt-4" style="text-align:left">
+            <ul class="list-unstyled">
+              <li class="d-flex gap-3 align-items-start mb-3">
+                <i class="fa-solid fa-circle-check" style="color:var(--brand-dark);margin-top:3px"></i>
+                <div>
+                  <strong>Root Canal Expertise</strong>
+                  <div class="small text-muted">Precision root canal treatment with long-lasting results.</div>
+                </div>
+              </li>
+              <li class="d-flex gap-3 align-items-start mb-3">
+                <i class="fa-solid fa-circle-check" style="color:var(--brand-dark);margin-top:3px"></i>
+                <div>
+                  <strong>Implants &amp; Cosmetic Work</strong>
+                  <div class="small text-muted">Implant, cosmetic procedures and smile-enhancing treatments.</div>
+                </div>
+              </li>
+              <li class="d-flex gap-3 align-items-start">
+                <i class="fa-solid fa-circle-check" style="color:var(--brand-dark);margin-top:3px"></i>
+                <div>
+                  <strong>World-Class Equipment</strong>
+                  <div class="small text-muted">Advanced tools for safe, modern dental care.</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6 text-center">
+          <div class="row g-3">
+            <div class="col-12">
+              <img class="w-90 rounded-4 mx-auto d-block" style="height:500px;object-fit:cover;box-shadow:0 18px 50px rgba(15,118,110,.18);"
+                   src="images\WhatsApp Image 2026-07-27 at 5.58.46 PM.jpeg" alt="Gurukrupa Dental Clinic" />
+              <div class="mt-4">
+                <div class="section-title fs-5 mb-2">
+                  <i class="fa-solid fa-award me-1" style="color:var(--gold)"></i>
+                  Certifications of Dr. Satish Modi
+                </div>
+                <p class="text-muted small mb-3">Click any certificate to view it in full size.</p>
+                <div class="row g-3 justify-content-center">
+                  <div class="col-6 col-lg-6">
+                    <button type="button" class="certificate-tile" data-src="images/certificate/WhatsApp%20Image%202026-08-01%20at%205.23.56%20PM%20(1).jpeg" aria-label="Open certificate 1">
+                      <img loading="lazy" src="images/WhatsApp%20Image%202026-08-01%20at%205.23.56%20PM%20(1).jpeg" alt="Dr. Satish Modi certificate 1" />
+                      <span class="zoom-indicator"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                    </button>
+                    <div class="small text-muted text-center mt-2">Certificate 1</div>
+                  </div>
+                  <div class="col-6 col-lg-6">
+                    <button type="button" class="certificate-tile" data-src="images/certificate/WhatsApp%20Image%202026-08-01%20at%205.23.56%20PM.jpeg" aria-label="Open certificate 2">
+                      <img loading="lazy" src="images/WhatsApp%20Image%202026-08-01%20at%205.23.56%20PM.jpeg" alt="Dr. Satish Modi certificate 2" />
+                      <span class="zoom-indicator"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                    </button>
+                    <div class="small text-muted text-center mt-2">Certificate 2</div>
+                  </div>
+                  <div class="col-6 col-lg-6">
+                    <button type="button" class="certificate-tile" data-src="images/certificate/WhatsApp%20Image%202026-08-01%20at%205.23.57%20PM%20(1).jpeg" aria-label="Open certificate 3">
+                      <img loading="lazy" src="images/WhatsApp%20Image%202026-08-01%20at%205.23.57%20PM%20(1).jpeg" alt="Dr. Satish Modi certificate 3" />
+                      <span class="zoom-indicator"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                    </button>
+                    <div class="small text-muted text-center mt-2">Certificate 3</div>
+                  </div>
+                  <div class="col-6 col-lg-6">
+                    <button type="button" class="certificate-tile" data-src="images/certificate/WhatsApp%20Image%202026-08-01%20at%205.23.57%20PM.jpeg" aria-label="Open certificate 4">
+                      <img loading="lazy" src="images/WhatsApp%20Image%202026-08-01%20at%205.23.57%20PM.jpeg" alt="Dr. Satish Modi certificate 4" />
+                      <span class="zoom-indicator"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                    </button>
+                    <div class="small text-muted text-center mt-2">Certificate 4</div>
+                  </div>
+                  <div class="col-6 col-lg-6">
+                    <button type="button" class="certificate-tile" data-src="images/WhatsApp%20Image%202026-08-02%20at%203.27.31%20PM.jpeg" aria-label="Open certificate 5">
+                      <img loading="lazy" src="images/WhatsApp%20Image%202026-08-02%20at%203.27.31%20PM.jpeg" alt="Dr. Satish Modi certificate 5" />
+                      <span class="zoom-indicator"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                    </button>
+                    <div class="small text-muted text-center mt-2">Certificate 5</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dental Treatments Videos -->
+  <section id="treatment-videos" class="py-5" style="background:var(--bg)">
+    <div class="container">
+      <div class="text-center mb-4">
+        <div class="section-title fs-4 center">Dental Treatment Videos</div>
+        <p class="lead mb-0 mt-2">Learn about our procedures through short videos.</p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-12 col-lg-6">
+          <div class="feature-card h-100" style="overflow:hidden">
+            <div class="ratio ratio-16x9">
+              <video preload="metadata" controls poster="images/clinic/1.jpg" style="width:100%;height:100%;object-fit:contain;">
+                <source src="images/WhatsApp%20Video%202026-07-27%20at%205.05.45%20PM.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <h5 class="fw-bold mt-3 mb-1">Root Canal Care</h5>
+            <p class="small text-muted mb-0">Gentle, step-by-step treatment overview.</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <div class="feature-card h-100" style="overflow:hidden">
+            <div class="ratio ratio-16x9">
+              <video preload="metadata" controls poster="images/clinic/2.jpg" style="width:100%;height:100%;object-fit:contain;">
+                <source src="images/WhatsApp%20Video%202026-07-27%20at%204.43.35%20PM.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <h5 class="fw-bold mt-3 mb-1">Dental Implants</h5>
+            <p class="small text-muted mb-0">Modern implant procedure explanation.</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <div class="feature-card h-100" style="overflow:hidden">
+            <div class="ratio ratio-16x9">
+              <video preload="metadata" controls poster="images/clinic/3.jpg" style="width:100%;height:100%;object-fit:contain;">
+                <source src="images/WhatsApp%20Video%202026-07-27%20at%204.46.49%20PM.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <h5 class="fw-bold mt-3 mb-1">Whitening &amp; Cosmetic</h5>
+            <p class="small text-muted mb-0">Smile enhancement guidance.</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <div class="feature-card h-100" style="overflow:hidden">
+            <div class="ratio ratio-16x9">
+              <video preload="metadata" controls poster="images/clinic/3.jpg" style="width:100%;height:100%;object-fit:contain;">
+                <source src="images\WhatsApp Video 2026-07-27 at 4.46.04 PM.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <h5 class="fw-bold mt-3 mb-1">Crowns and Bridges</h5>
+            <p class="small text-muted mb-0">Caps or fixed structures used to cover damaged teeth or fill gaps.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctors -->
+  <section id="doctors" class="py-5" style="background:var(--bg)">
+    <div class="container">
+      <div class="text-center mb-4">
+        <div class="section-title fs-4 center">Meet Our Dentists</div>
+        <p class="lead mb-0 mt-2">A dedicated team of experienced dentists committed to precise, comfortable, and high-quality treatment for every patient.</p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+          <div class="quote">
+            <div class="d-flex align-items-center gap-3">
+              <img src="images/WhatsApp%20Image%202026-06-25%20at%206.17.32%20PM.jpeg" alt="Dr. Satish Modi"
+                   style="width:80px;height:100px;border-radius:16px;object-fit:cover;border:1px solid rgba(20,184,166,.2)" />
+              <div>
+                <div class="fw-bold">Dr. Satish Modi</div>
+                <div class="small text-muted">BDS</div>
+              </div>
+            </div>
+            <p class="small text-muted mt-3 mb-0">
+              Over 19 years of experience and trusted care since 2007.
+              Specialist in root canal treatment, dental implants, cosmetic dentistry, and fixed prosthesis.
+              We focus on accurate diagnosis, precise treatment, and patient comfort for long-lasting results.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="quote">
+            <div class="d-flex align-items-center gap-3">
+              <img
+                src="images\WhatsApp Image 2026-07-27 at 8.58.33 PM.jpeg"
+                alt="Dr. Amul Chauhan"
+                loading="lazy"
+                style="width:80px;height:100px;border-radius:16px;object-fit:cover;border:1px solid rgba(20,184,166,.2)" />
+              <div>
+                <div class="fw-bold">Dr. Amul Chauhan</div>
+                <div class="small text-muted">BDS</div>
+              </div>
+            </div>
+            <p class="small text-muted mt-3 mb-0">
+              I have been working at Gurukrupa Dental Clinic and Implant Center for the past three years. Under the guidance of Dr. Sateshbhai, I have gained extensive experience in all aspects of dental surgery. I am also well-versed in the latest dental technologies and modern surgical techniques, enabling me to provide high-quality patient care and achieve successful clinical outcomes.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="quote">
+            <div class="d-flex align-items-center gap-3">
+              <img
+                src="images/jaspreet.jpg"
+                alt="Dr. Jaspreet Kaur"
+                loading="lazy"
+                style="width:80px;height:100px;border-radius:16px;object-fit:cover;border:1px solid rgba(20,184,166,.2)" />
+              <div>
+                <div class="fw-bold">Dr. Jaspreet Kaur</div>
+                <div class="small text-muted">BDS</div>
+              </div>
+            </div>
+            <p class="small text-muted mt-3 mb-0">
+              I have been working at Gurukrupa Dental Clinic and Implant Center for the past three years, where I have gained extensive clinical and surgical experience under the guidance of Dr. Sateshbhai. I am committed to maintaining high clinical standards, continuously improving my skills, and delivering the best possible treatment outcomes for every patient.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-5" style="background:var(--bg)">
+    <div class="container">
+      <div class="text-center mb-4">
+        <div class="section-title fs-4 center">Patient Reviews</div>
+        <p class="lead mb-0 mt-2">Watch real feedback from our patients.</p>
+      </div>
+
+      <div class="row g-3" id="testimonialGrid">
+        <!-- Video Reviews -->
+        <div class="col-md-4 col-lg-4">
+          <div class="feature-card video-card h-100">
+            <div class="ratio ratio-16x9">
+              <video preload="metadata" controls poster="images/clinic/4.jpg" style="width:100%;height:100%;object-fit:contain;">
+                <source src="images\WhatsApp Video 2026-07-27 at 4.43.18 PM.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="mt-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="fw-bold">Upendra Maheta</div>
+                <div class="text-warning">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+              <p class="small text-muted mt-2 mb-0">"Very professional and friendly staff. The treatment was painless."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card video-card h-100">
+            <div class="ratio ratio-16x9">
+              <video preload="metadata" controls poster="images/clinic/5.jpg" style="width:100%;height:100%;object-fit:contain;">
+                <source src="images\Video Project.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="mt-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="fw-bold">Renukaben Thakkar</div>
+                <div class="text-warning">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                </div>
+              </div>
+              <p class="small text-muted mt-2 mb-0">"Clean clinic and clear instructions. Highly recommended."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="feature-card video-card h-100">
+            <div class="ratio ratio-16x9">
+              <video preload="metadata" controls poster="images/clinic/6.jpg" style="width:100%;height:100%;object-fit:contain;">
+                <source src="images\WhatsApp Video 2026-07-27 at 6.58.09 PM.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="mt-3">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="fw-bold">Devikaben Patel</div>
+                <div class="text-warning">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+              <p class="small text-muted mt-2 mb-0">"Great service! My smile looks amazing after treatment."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google-style text reviews -->
+        <div class="col-md-6 col-lg-4">
+          <div class="quote">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="fw-bold">Urvi Jani</div>
+              <div class="text-warning">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+            <p class="small text-muted mt-2 mb-0">One of trusted doctor in Isanpur Maninagar. Fees also less compared to others and work accurate.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="quote">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="fw-bold">Smit Shah</div>
+              <div class="text-warning">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+            <p class="small text-muted mt-2 mb-0">Good service and well-trained staff. Really good satisfied treatment.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="quote">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="fw-bold">Pramod Mistry</div>
+              <div class="text-warning">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+            <p class="small text-muted mt-2 mb-0">Very good experience. Perfect work, economical and long-lasting work with friendly nature.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="quote">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="fw-bold">Sonali Mishra</div>
+              <div class="text-warning">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+            <p class="small text-muted mt-2 mb-0">Excellent service. Thank you for the excellent treatment they gave me.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="quote">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="fw-bold">Komal Bhavsar</div>
+              <div class="text-warning">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+            <p class="small text-muted mt-2 mb-0">Excellent service, supportive behavior. Must visit if you have any dental problems.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="quote">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="fw-bold">Jignesh Solanki</div>
+              <div class="text-warning">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+            <p class="small text-muted mt-2 mb-0">Well experienced and skilled professional. I was suffering since last two years, improved well.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dental Care Posts -->
+  <section id="posts" class="py-5" style="background:var(--bg)">
+    <div class="container">
+      <div class="text-center mb-4">
+        <div class="section-title fs-4 center">Dental Care Posts</div>
+        <p class="lead mb-0 mt-2">Quick tips, clinic updates, and patient guidance.</p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+          <article class="quote h-100 overflow-hidden">
+            <img src="images/1p.jpeg" alt="Brushing Tips" loading="lazy" class="post-card-img" />
+            <div class="p-3">
+              <div class="d-flex align-items-start gap-3">
+                <div class="feature-icon" style="width:48px;height:48px;margin:0;">
+                  <i class="fa-solid fa-tooth" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <div class="fw-bold">Brushing Tips</div>
+                  <div class="small text-muted">1 minute read • Daily care</div>
+                </div>
+              </div>
+              <p class="small text-muted mt-3 mb-0">Brush twice a day for 2 minutes using gentle circular motions. Don't forget the tongue.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <article class="quote h-100 overflow-hidden">
+            <img src="images/2p.jpeg" alt="Healthy Gum Routine" loading="lazy" class="post-card-img" />
+            <div class="p-3">
+              <div class="d-flex align-items-start gap-3">
+                <div class="feature-icon" style="width:48px;height:48px;margin:0;">
+                  <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <div class="fw-bold">Healthy Gum Routine</div>
+                  <div class="small text-muted">2 minute read • Gum care</div>
+                </div>
+              </div>
+              <p class="small text-muted mt-3 mb-0">Use floss daily and consider an antiseptic rinse if recommended by your dentist.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <article class="quote h-100 overflow-hidden">
+            <img src="images/3p.png" alt="Why Regular Checkups?" loading="lazy" class="post-card-img" />
+            <div class="p-3">
+              <div class="d-flex align-items-start gap-3">
+                <div class="feature-icon" style="width:48px;height:48px;margin:0;">
+                  <i class="fa-solid fa-stethoscope" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <div class="fw-bold">Why Regular Checkups?</div>
+                  <div class="small text-muted">1 minute read • Preventive care</div>
+                </div>
+              </div>
+              <p class="small text-muted mt-3 mb-0">Early detection helps avoid pain and expensive treatment. Schedule your dental visit today.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Appointment + Contact -->
+  <section id="appointment" class="py-5" style="background:var(--bg)">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-6">
+          <div class="appt">
+            <div class="section-title fs-4">Book an Appointment</div>
+            <p class="lead mt-2 mb-4">Send your details and we'll get back to you.</p>
+
+            <form onsubmit="event.preventDefault(); alert('Thanks! Appointment request submitted (demo).');">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Full Name</label>
+                  <input class="form-control" required placeholder="Enter your name" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Phone Number</label>
+                  <input class="form-control" required placeholder="Enter phone number" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Date</label>
+                  <input type="date" class="form-control" required />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Service</label>
+                  <select class="form-select" required>
+                    <option value="General Dentistry">General Dentistry</option>
+                    <option value="Cosmetic Dentistry">Cosmetic Dentistry</option>
+                    <option value="Root Canal Treatment">Root Canal Treatment</option>
+                    <option value="Orthodontics">Orthodontics</option>
+                    <option value="Aligners">Aligners</option>
+                    <option value="Emergency Care">Emergency Care</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Message (optional)</label>
+                  <textarea class="form-control" rows="3" placeholder="Any notes about your dental concern"></textarea>
+                </div>
+              </div>
+
+              <a href="https://wa.me/919924644779?text=Hello%20Gurukrupa%20Dental%20Clinic,%20I%20would%20like%20to%20book%20an%20appointment."
+                 target="_blank"
+                 class="btn btn-gold w-100 mt-3"
+                 style="font-weight:800;text-decoration:none;">
+                Submit Appointment Request
+              </a>
+            </form>
+
+            <div class="mt-3 small text-muted">
+              Note: Form submission is a front-end demo. Connect it to email/WhatsApp/backend if needed.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6" id="contact">
+          <div class="appt h-100">
+            <div class="section-title fs-4">Contact Us</div>
+            <div class="mt-3 d-flex flex-column gap-3">
+              <div class="d-flex gap-3">
+                <div class="feature-icon" style="width:44px;height:44px;margin:0;background:rgba(20,184,166,.10)">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <div class="fw-bold">Clinic Address</div>
+                  <div class="small text-muted">A/4/1, Bus Stand, Ganesh Apartment, Cross Road, Near Jaymala, Asopalav Nagar, Jaymala, Isanpur, Ahmedabad, Gujarat 382443</div>
+                </div>
+              </div>
+
+              <div class="d-flex gap-3">
+                <div class="feature-icon" style="width:44px;height:44px;margin:0;background:rgba(20,184,166,.10)">
+                  <i class="fa-brands fa-facebook-f"></i>
+                </div>
+                <div>
+                  <div class="fw-bold">Facebook</div>
+                  <a class="small" target="_blank" rel="noopener noreferrer" href="https://facebook.com/satishmodi91">satish modi</a>
+                </div>
+              </div>
+
+              <div class="d-flex gap-3">
+                <div class="feature-icon" style="width:44px;height:44px;margin:0;background:rgba(20,184,166,.10)">
+                  <i class="fa-brands fa-instagram"></i>
+                </div>
+                <div>
+                  <div class="fw-bold">Instagram</div>
+                  <a class="small" target="_blank" rel="noopener noreferrer" href="https://instagram.com/gurukrupa_dental_clinic">gurukrupa_dental_clinic</a>
+                  <div class="small text-muted mt-1">
+                    <a target="_blank" rel="noopener noreferrer" href="https://instagram.com/satishmodi91">satishmodi91</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex gap-3">
+                <div class="feature-icon" style="width:44px;height:44px;margin:0;background:rgba(20,184,166,.10)">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div>
+                  <div class="fw-bold">Phone</div>
+                  <a class="small" href="tel:+919924644779">+91 9924644779</a>
+                </div>
+              </div>
+
+              <div class="d-flex gap-3">
+                <div class="feature-icon" style="width:44px;height:44px;margin:0;background:rgba(20,184,166,.10)">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                  <div class="fw-bold">Email</div>
+                  <a class="small" href="mailto:satishmodi91@gmail.com">satishmodi91@gmail.com</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <div class="section-title fs-6 mb-2">Clinic Hours</div>
+              <div class="d-flex flex-column gap-2">
+                <div class="d-flex justify-content-between small">
+                  <span>Monday - Saturday</span>
+                  <span class="fw-semibold text-dark">Morning 9:00 - 1:00 &amp; Evening 5:00 - 9:00</span>
+                </div>
+                <div class="d-flex justify-content-between small">
+                  <span>Sunday</span>
+                  <span class="fw-semibold text-dark">As per appointment</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 rounded-4 overflow-hidden border" style="border-color:rgba(20,184,166,.25)">
+              <iframe
+                class="w-100"
+                style="height:220px; border:0;"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=A%2F4%2F1%2C%20Bus%20Stand%2C%20Ganesh%20Apartment%2C%20Cross%20Road%2C%20Near%20Jaymala%2C%20Asopalav%20Nagar%2C%20Jaymala%2C%20Isanpur%2C%20Ahmedabad%2C%20Gujarat%20382443&output=embed">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clinic Photo Gallery -->
+  <section id="gallery" class="py-5" style="background:var(--bg)">
+    <div class="container">
+      <div class="text-center mb-4">
+        <div class="section-title fs-4 center">Clinic Photo Gallery</div>
+        <p class="lead mb-0 mt-2">A look at our clinic environment &amp; care moments—animated and interactive.</p>
+      </div>
+
+      <div class="row g-3" id="galleryGrid">
+        <!-- Cards are injected by JS from images/1.jpg .. 8.jpg -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" aria-hidden="true">
+    <div id="lightboxBackdrop"></div>
+    <div id="lightboxInner">
+      <button type="button" id="lightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightboxImg" src="" alt="Expanded clinic image" />
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-4">
+    <div class="container">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-6">
+          <div class="fw-bold">Gurukrupa Dental Clinic</div>
+          <div class="small text-light opacity-75">Healthy smiles start here.</div>
+        </div>
+        <div class="col-md-6 d-flex flex-wrap gap-3 justify-content-md-end">
+          <a class="small" href="#services">Services</a>
+          <a class="small" href="#about">About</a>
+          <a class="small" href="#doctors">Doctors</a>
+          <a class="small" href="#gallery">Gallery</a>
+          <a class="small" href="#testimonials">Reviews</a>
+          <a class="small" href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="border-top mt-3 pt-3 small d-flex flex-wrap gap-2 justify-content-between">
+        <span>© <span id="year"></span> Gurukrupa Dental Clinic. All rights reserved.</span>
+        <span>Designed for demo • Replace images &amp; details.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- jQuery (required by user) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Clinic gallery from local folder: images/clinic/1.jpg .. 8.jpg
+    const clinicImages = [
+      'images/1.jpg',
+      'images/2.jpg',
+      'images/3.jpg',
+      'images/4.jpg',
+      'images/5.jpg',
+      'images/6.jpg',
+      'images/7.jpg',
+      'images/8.jpg'
+    ];
+
+    let galleryIndex = 0;
+    const pageSize = 8;
+
+    function galleryCard(src, idx) {
+      return `
+        <div class="col-6 col-md-4 col-lg-3">
+          <button type="button" class="gallery-tile" data-src="${src}" aria-label="Open image ${idx + 1}">
+            <span class="shine"></span>
+            <img loading="lazy" class="w-100" src="${src}" alt="Clinic image ${idx + 1}" />
+            <span class="zoom-indicator"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+          </button>
+        </div>`;
+    }
+
+    function loadMore() {
+      const grid = $('#galleryGrid');
+      const next = clinicImages.slice(galleryIndex, galleryIndex + pageSize);
+
+      next.forEach((src, i) => {
+        const idx = galleryIndex + i;
+        grid.append(galleryCard(src, idx));
+      });
+
+      galleryIndex += next.length;
+      if (galleryIndex >= clinicImages.length) {
+        $('#loadMoreBtn').text('All images loaded');
+        $('#loadMoreBtn').prop('disabled', true);
+      }
+    }
+
+    // Initial load
+    loadMore();
+
+    // Scroll reveal motion (intersection observer)
+    const revealEls = document.querySelectorAll('.feature-card, .quote, .appt, .gallery-tile, .certificate-tile, #galleryGrid > div');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('reveal','in');
+          entry.target.classList.remove('fade-out');
+        } else {
+          // fade out when it leaves viewport (all images inside the element will fade too)
+          entry.target.classList.add('fade-out');
+        }
+      });
+    },{threshold:0.12});
+
+    revealEls.forEach(el=>{
+      el.classList.add('reveal');
+      io.observe(el);
+    });
+
+    $('#loadMoreBtn').on('click', function () {
+      loadMore();
+    });
+
+    // Lightbox (simple)
+    $(document).on('click', '.gallery-tile, .certificate-tile', function () {
+      const src = $(this).attr('data-src');
+      $('#lightboxImg').attr('src', src);
+      $('#lightbox').fadeIn(180);
+    });
+
+    $('#lightboxClose, #lightboxBackdrop').on('click', function () {
+      $('#lightbox').fadeOut(160);
+    });
+
+    $(document).on('keydown', function (e) {
+      if (e.key === 'Escape') $('#lightbox').fadeOut(160);
+    });
+  </script>
+</body>
+</html>
+
